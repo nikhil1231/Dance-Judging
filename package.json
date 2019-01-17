@@ -1,0 +1,22 @@
+{
+  "name": "superhero",
+  "version": "1.0.0",
+  "description": "Superhero ",
+  "main": "app.js",
+  "dependencies": {
+    "ask-sdk": "^2.3.0",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://source.developers.google.com/p/porticode3/r/superhero_repo"
+  },
+  "author": "",
+  "license": "ISC"
+}
