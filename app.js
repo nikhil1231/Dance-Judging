@@ -1,22 +1,19 @@
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-var formidable = require('formidable');
-var privateKey  = fs.readFileSync('server.key', 'utf8');
-var certificate = fs.readFileSync('server.crt', 'utf8');
-var MongoClient = require('mongodb').MongoClient;
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const url = require('url');
+const formidable = require('formidable');
+const privateKey  = fs.readFileSync('server.key', 'utf8');
+const certificate = fs.readFileSync('server.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
 
-var credentials = {key: privateKey, cert: certificate};
-var express = require('express');
-var app = express();
+const mongoClient = require('mongodb').MongoClient;
 
-var url = "mongodb://localhost:27017/mydb";
+const express = require('express');
+const app = express();
 
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-//   db.close();
-// });
+const mongoUrl = "mongodb://localhost:27017/dance";
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/www/index.html')
@@ -31,11 +28,79 @@ app.post('/fileupload', (req, res) => {
 		const extension = files.filetoupload.name.split('.').pop();
 		const oldpath = files.filetoupload.path;
 		const newpath = __dirname + '/videos/' + filename + '.' + extension;
+		// Move video to new path
 		fs.rename(oldpath, newpath, (err) => {
 			if (err) throw err;
-			res.write('Video successfully uploaded.');
-			res.end();
+			// res.write('Video successfully uploaded.');
 		});
+
+		mongoClient.connect(mongoUrl, (err, db) => {
+			if (err) {
+				console.log("ERROR: ", err);
+			} else {
+				const danceDb = db.db('dance');
+				const collection = danceDb.collection("competitions");
+
+				collection.findOneAndUpdate({competition: { $eq: fields.competition}},
+					{
+						$setOnInsert: {
+							location: fields.location,
+							routines: []
+						}
+					},
+					{
+						new: true,
+						upsert: true
+					}, (err, result) => {
+						collection.update(
+							{competition: { $eq: fields.competition}},
+							{
+								$push: {
+									routines: {
+										id: filename,
+										name: fields.name,
+										dance: fields.dance,
+										results: []
+									}
+								}
+							}, (err, result) => {
+								res.write('<html><head></head><body>')
+								res.write(`<h1>Video URL: <a href='/judge?id=${filename}'>here</a></h1>`)
+								res.write('</body></html>')
+								res.end();
+							}
+						)
+					}
+				)
+
+			} 
+		})
+	})
+})
+
+
+app.get('/judge', (req, res) => {
+	mongoClient.connect(mongoUrl, (err, db) => {
+		if (err) {
+			console.log("ERROR: ", err);
+		} else {
+			const danceDb = db.db('dance');
+			const collection = danceDb.collection("competitions");
+
+			const id = url.parse(req.url, true).query.id;
+
+			collection.find({"routines.id": id}).toArray((err, result) => {
+				if (err) {
+					res.send(err);
+				} else if (result.length) {
+					res.send(result);
+				} else {
+					res.send("No documents found.");
+				}
+			})
+
+			db.close();
+		} 
 	})
 })
 
