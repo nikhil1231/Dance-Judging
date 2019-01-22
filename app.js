@@ -12,6 +12,7 @@ const app = express();
 
 const indexPage = require('./routes/index');
 const uploadPage = require('./routes/upload');
+const listPage = require('./routes/list');
 const judgePage = require('./routes/judge');
 
 app.use(bodyParser.json());
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'videos')));
 app.set('view engine', 'pug');
 app.use('/', indexPage);
 app.use('/upload', uploadPage);
+app.use('/list', listPage);
 app.use('/judge', judgePage);
 
 var httpServer = http.createServer(app);
