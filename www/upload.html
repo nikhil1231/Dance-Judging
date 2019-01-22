@@ -7,12 +7,13 @@
 </head>
 <body>
   <h1><a href="/">Dance Dance Website</a></h1>
-  <ul>
-    <li><a href="Upload">Upload</a></li>
-  </ul>
   <div class="container">
     <form action="/upload/fileupload" method="post" enctype="multipart/form-data" accept='video/*'>
-    	<input type="file" name="filetoupload"><br>
+      <input type="file" name="filetoupload"><br>
+    	<input type="text" placeholder='Competition' name="competition"><br>
+    	<input type="text" placeholder='Location' name="location"><br>
+    	<input type="text" placeholder='Dance' name="dance"><br>
+    	<input type="text" placeholder='Name' name="name"><br>
     	<input type="submit">
     </form>
   </div>

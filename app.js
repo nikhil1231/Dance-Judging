@@ -1,26 +1,19 @@
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-// var formidable = require('formidable');
-var privateKey  = fs.readFileSync('server.key', 'utf8');
-var certificate = fs.readFileSync('server.crt', 'utf8');
-var MongoClient = require('mongodb').MongoClient;
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const privateKey  = fs.readFileSync('server.key', 'utf8');
+const certificate = fs.readFileSync('server.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
 
-var credentials = {key: privateKey, cert: certificate};
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var indexPage = require('./routes/index');
-var uploadPage = require('./routes/upload');
+const indexPage = require('./routes/index');
+const uploadPage = require('./routes/upload');
 
 
-var url = "mongodb://localhost:27017/mydb";
 
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-//   db.close();
-// });
+
 app.set('view engine', 'pug');
 app.use('/', indexPage);
 app.use('/upload', uploadPage);
