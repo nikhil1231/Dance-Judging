@@ -3,10 +3,10 @@ $(document).ready(() => {
 		success: (data) => {
 			for (const competition of data) {
 				$('#list').append(
-					$('<li>').append(
+					$('<li>').attr('class','list-group-item bg-primary').append(
 						$('<a href>')
 							.attr({
-								'class': 'competition-item',
+								'class': 'competition-item text-white',
 								'id': competition._id
 							}).append(
 							`${competition.competition}, ${competition.location}`
@@ -25,8 +25,9 @@ $(document).ready(() => {
 				console.log(data)
 				for (const routine of data) {
 					$('#list').append(
-						$('<li>').append(
+						$('<li>').attr('class','list-group-item bg-primary').append(
 							$(`<a href="../judge?id=${routine.id}">`)
+								.attr('class', 'text-white')
 								.append(
 								`${routine.dance}, ${routine.name}`
 							)

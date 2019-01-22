@@ -15,7 +15,7 @@ $(document).ready(() => {
 function refreshRatings(results) {
 	for (const result of results) {
 		$('#results-list').append(
-			$('<li>').append(
+			$('<li>').attr('class','list-group-item bg-primary').append(
 				`Rating: ${result.rating}, Comment: ${result.comment}`
 			)
 		);

@@ -4,19 +4,79 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Video Upload</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/freelancer.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1><a href="/">Dance Dance Website</a></h1>
-  <div class="container">
-    <form action="/upload/fileupload" method="post" enctype="multipart/form-data" accept='video/*'>
-      <input type="file" name="filetoupload"><br>
-    	<input type="text" placeholder='Competition' name="competition"><br>
-    	<input type="text" placeholder='Location' name="location"><br>
-    	<input type="text" placeholder='Dance' name="dance"><br>
-    	<input type="text" placeholder='Name' name="name"><br>
-    	<input type="submit">
-    </form>
-  </div>
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="../">Arthur Murray</a>
+    </div>
+  </nav>
+    <header class="masthead">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Upload Video</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <form action="/upload/fileupload" method='post' enctype="multipart/form-data" novalidate="novalidate">
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Competition</label>
+                  <input class="form-control" name="Competition" type="text" placeholder="Competition">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Location</label>
+                  <input class="form-control" name="location" type="text" placeholder="Location">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Dance</label>
+                  <input class="form-control" name="dance" type="text" placeholder="Dance">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Name</label>
+                  <input class="form-control" name="name" type='text' placeholder="Name"></input>
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Video file</label>
+                  <input class="form-control" name="filetoupload" type='file' accept='video/*'></input>
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <br>
+              <div id="success"></div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-xl">Upload</input>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
 
   </body>
 </html>
