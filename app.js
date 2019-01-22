@@ -1,6 +1,8 @@
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+const path = require('path');
+const bodyParser = require('body-parser')
 const privateKey  = fs.readFileSync('server.key', 'utf8');
 const certificate = fs.readFileSync('server.crt', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
@@ -10,13 +12,16 @@ const app = express();
 
 const indexPage = require('./routes/index');
 const uploadPage = require('./routes/upload');
+const judgePage = require('./routes/judge');
 
-
-
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'www')));
+app.use(express.static(path.join(__dirname, 'videos')));
 
 app.set('view engine', 'pug');
 app.use('/', indexPage);
 app.use('/upload', uploadPage);
+app.use('/judge', judgePage);
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
