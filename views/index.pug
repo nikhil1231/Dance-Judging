@@ -1,5 +1,23 @@
-html
-  head
-    title= title
-  body
-    h1= message
+extends ./layout.pug
+
+block title
+  title Dance Dance
+block content
+  nav (class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav")
+    div (class="container")
+      a (class="navbar-brand js-scroll-trigger" href="#page-top">Arthur Murray)
+
+  //Header
+  header (class="masthead bg-primary text-white text-center")
+    div (class="container")
+      img (class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="")
+      h1(class="text-uppercase mb-0">Judging Platform)
+      hr(class="star-light")
+      h2(class="font-weight-light mb-0">Judge competitions online)
+      div (class="text-center mt-4")
+        (a href='upload' class="btn btn-xl btn-outline-light" href="#")
+          i (class="fas fa-upload mr-2")
+          Upload
+        a (href='list' class="btn btn-xl" href="#")
+          i (class="fas fa-bars mr-2")
+          View List
