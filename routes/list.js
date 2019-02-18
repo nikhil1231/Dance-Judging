@@ -35,6 +35,29 @@ router.get('/getCompetitions', (req, res) => {
 	})
 })
 
+router.get('/getDances', (req, res) => {
+	mongoClient.connect(mongoUrl, (err, db) => {
+		if (err) {
+			console.log("ERROR: ", err);
+		} else {
+			const collection = db.db('dance').collection("competitions");
+
+			collection.find({}).toArray((err, result) => {
+				if (err) {
+					res.send(err);
+				} else if (result.length) {
+					result.forEach((x) => delete x.routines)
+					res.send(result);
+				} else {
+					res.send("No documents found.");
+				}
+			})
+
+			db.close();
+		}
+	})
+})
+
 router.get('/getRoutines', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
