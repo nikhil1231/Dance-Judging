@@ -30,38 +30,39 @@ router.post('/fileupload', (req, res) => {
 		fs.rename(oldpath, newpath, (err) => {
 			if (err) throw err;
 			// res.write('Video successfully uploaded.');
-	});
+		});
 
+		console.log(fields)
 
-    // res.writeHead(200);
-    // res.end("test");
+	    // res.writeHead(200);
+	    // res.end("test");
 
-    mongoClient.connect(mongoUrl, (err, db) => {
+	    mongoClient.connect(mongoUrl, (err, db) => {
 			if (err) {
 				console.log("ERROR: ", err);
 			} else {
 				const danceDb = db.db('dance');
 				const collection = danceDb.collection("competitions");
 
-				collection.findOneAndUpdate({competition: { $eq: fields.competition}},
+				collection.findOneAndUpdate({dance: { $eq: fields.dance}},
 					{
 						$setOnInsert: {
-							location: fields.location,
 							routines: []
 						}
 					},
 					{
-						new: true,
+						returnNewDocument: true,
 						upsert: true
 					}, (err, result) => {
 						collection.update(
-							{competition: { $eq: fields.competition}},
+							{dance: { $eq: fields.dance}},
 							{
 								$push: {
 									routines: {
 										id: filename,
 										name: fields.name,
-										dance: fields.dance,
+										location: fields.location,
+										competition: fields.competition,
 										results: []
 									}
 								}

@@ -1,13 +1,13 @@
 {
 	"competitions": [
 		{
-			"location": "Miami",
-			"competition": "Dance Competition",
+			"dance": "Foxtrot",
 			"routines": [
 				{
 					"id": "123456789_1234",
 					"name": "John Smith",
-					"dance": "Foxtrot",
+					"competition": "Dance Competition",
+					"location": "Miami",
 					"results": [
 						{
 							"score": "7.5",
