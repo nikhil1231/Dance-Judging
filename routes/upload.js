@@ -16,8 +16,11 @@ router.get('/', (req, res) => {
 })
 
 router.post('/fileupload', (req, res) => {
+  // console.log("check" + req.body);
+  // console.log("check2");
 	var form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
+      // console.log("check2 :" + fields.competition);
     	const d = new Date();
     	// Create unique video file name.
     	const filename = d.getTime() + "_" + Math.floor((Math.random() * 9000) + 1000);
@@ -33,6 +36,7 @@ router.post('/fileupload', (req, res) => {
 	// 		// res.write('Video successfully uploaded.');
 	// });
 
+  console.log(fields)
 
     // res.writeHead(200);
     // res.end("test");
@@ -44,25 +48,25 @@ router.post('/fileupload', (req, res) => {
 				const danceDb = db.db('dance');
 				const collection = danceDb.collection("competitions");
 
-				collection.findOneAndUpdate({competition: { $eq: fields.competition}},
+				collection.findOneAndUpdate({dance: { $eq: fields.dance}},
 					{
 						$setOnInsert: {
-							location: fields.location,
 							routines: []
 						}
 					},
 					{
-						new: true,
+						returnNewDocument: true,
 						upsert: true
 					}, (err, result) => {
 						collection.update(
-							{competition: { $eq: fields.competition}},
+							{dance: { $eq: fields.dance}},
 							{
 								$push: {
 									routines: {
 										id: filename,
 										name: fields.name,
-										dance: fields.dance,
+                    location: fields.location,
+										competition: fields.competition,
 										results: []
 									}
 								}

@@ -66,6 +66,9 @@ router.get('/getRoutines', (req, res) => {
 			const collection = db.db('dance').collection("competitions");
 
 			const id = new ObjectId(url.parse(req.url, true).query.id);
+      // console.log(url.parse(req.url, true).query.id);
+      // console.log("haha");
+
 
 			collection.find({_id: id}).toArray((err, result) => {
 				if (err) {
@@ -81,6 +84,7 @@ router.get('/getRoutines', (req, res) => {
 		}
 	})
 })
+
 
 
 module.exports = router;
