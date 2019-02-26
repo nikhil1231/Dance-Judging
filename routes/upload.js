@@ -30,6 +30,7 @@ router.post('/fileupload', (req, res) => {
 		const newpath = __dirname + '/../videos/' + filename + '.' + extension;
     	// Move video to new path
 
+<<<<<<< HEAD
     	// console.log(oldpath, newpath)
 	// 	fs.rename(oldpath, newpath, (err) => {
 	// 		if (err) throw err;
@@ -37,11 +38,20 @@ router.post('/fileupload', (req, res) => {
 	// });
 
   console.log(fields)
+=======
+    	console.log(oldpath, newpath)
+		fs.rename(oldpath, newpath, (err) => {
+			if (err) throw err;
+			// res.write('Video successfully uploaded.');
+		});
 
-    // res.writeHead(200);
-    // res.end("test");
+		console.log(fields)
+>>>>>>> 54cf08784699fccab0c0700cdd51704d521f827d
 
-    mongoClient.connect(mongoUrl, (err, db) => {
+	    // res.writeHead(200);
+	    // res.end("test");
+
+	    mongoClient.connect(mongoUrl, (err, db) => {
 			if (err) {
 				console.log("ERROR: ", err);
 			} else {
@@ -65,7 +75,11 @@ router.post('/fileupload', (req, res) => {
 									routines: {
 										id: filename,
 										name: fields.name,
+<<<<<<< HEAD
                     location: fields.location,
+=======
+										location: fields.location,
+>>>>>>> 54cf08784699fccab0c0700cdd51704d521f827d
 										competition: fields.competition,
 										results: []
 									}
