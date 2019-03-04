@@ -1,0 +1,17 @@
+/* .container {
+    grid-template-columns: 40px 50px auto 50px 40px;
+    /* grid-template-rows: 25% 100px auto; 
+}
+   */
+.img-footer-logo {
+    height: 20%;
+    width: 20%;
+    display: inline-grid;
+    padding: 2%;
+    
+
+}
+
+/* #logo-wrapper {
+    /* padding: 10%; 
+} */
