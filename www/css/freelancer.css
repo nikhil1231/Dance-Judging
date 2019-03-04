@@ -382,3 +382,12 @@ a:focus, a:hover, a:active {
   background-color: #1a252f;
   border-color: #1a252f;
 }
+
+/*!
+  Sadhbha
+*/
+
+img {
+  height: 10px;
+  width: 25px;
+}
