@@ -12,10 +12,10 @@ var path = require('path');
 
 // var upload = multer({ storage })
 
-const mongoClient = require('mongodb').MongoClient;
-const mongoUrl = "mongodb://localhost:27017/dance";
 
 router.get('/', (req, res) => {
+    // console.log('/', req.user);
+    // console.log('test');
     res.sendFile(path.resolve('www/index.html'));
     // res.render('index', {});
     // res.send("Hello world!")
