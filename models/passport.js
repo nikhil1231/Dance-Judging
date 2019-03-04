@@ -39,19 +39,19 @@ module.exports = function (app) {
             usernameField: 'email',
             passwordField: 'pwd'
         },
-        function (username, password, done) {
-            console.log('LocalStrategy', username, password);
+        function (email, password, done) {
+            console.log('LocalStrategy', email, password);
             mongoClient.connect(mongoUrl, (err, db) => {
                 if (err) {
                     console.log("ERROR: ", err);
                 } else {
                     const userDb = db.db('users');
                     const collection = userDb.collection("identities");
-                    // console.log(username);
+                    // console.log(email);
                     // console.log(password);
                     collection.findOne({
                         email: {
-                            $eq: username
+                            $eq: email
                         }
                     }, function (err, user) {
                         // console.log('user password', user.password);
@@ -61,7 +61,7 @@ module.exports = function (app) {
                         if (!user) {
                             console.log(1);
                             return done(null, false, {
-                                message: 'Incorrect username.'
+                                message: 'Incorrect email.'
                             });
                         }
                         if (user.password !== password) {
