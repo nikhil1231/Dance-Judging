@@ -1,3 +1,4 @@
+//dance
 {
 	"competitions": [
 		{
@@ -16,6 +17,17 @@
 					]
 				}
 			]
+		}
+	]
+}
+
+//users
+{
+	"identities": [
+		{
+			"eamil": "jerrykang13@gmail.com",
+			"password": "111111",
+			"username": "jerry",
 		}
 	]
 }
