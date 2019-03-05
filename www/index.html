@@ -24,35 +24,31 @@
 
 	</head>
 	<body id='page-top'>
-		<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+		<nav height="1" class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase">
 	      <div class="container">
 	        <a class="navbar-brand js-scroll-trigger" href="#page-top">Arthur Murray</a>
-	        
 	      </div>
-	    </nav>
+	  </nav>
+			<div class="hero-image">
+					<div class="hero-text">
+						<h3>Where dance and technology collide</h3>
+					</div>
+			</div>
 
-	    <!-- Header -->
-	    <header class="masthead bg-primary text-white text-center">
-	      <div class="container">
-	        <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
-	        <h1 class="text-uppercase mb-0">Welcome to the Arthur Murray Judging Platform</h1>
-	        <hr class="star-light">
-					<h2 class="font-weight-light mb-0"></h2>
-					<h3>Where dance and technology collide.</h3>
-					<h6>Use this platform to help Microsoft’s cloud-based AI algorithm to learn how to judge ballroom dance performances. 
-							Join our community of dance professionals, and by uploading your own dance or giving feedback on others you are helping to make the future the present!</h6>
-	        <div class="text-center mt-4">
-	          <a href='upload' class="btn btn-xl btn-outline-light" href="#">
-	            <i class="fas fa-upload mr-2"></i>
-	            Upload dance
-	          </a>
-	          <a href='list' class="btn btn-xl" href="#">
-	            <i class="fas fa-bars mr-2"></i>
-	            Judge dances
-	          </a>
-	        </div>
-	      </div>
-			</header>
+			<main>
+				<h6>Use this platform to help Microsoft’s cloud-based AI algorithm to learn how to judge ballroom dance performances. 
+					Join our community of dance professionals, and by uploading your own dance or giving feedback on others you are helping to make the future the present!</h6>
+				<div class="text-center mt-4">
+				<a href='upload' class="btn btn-xl btn-outline-light" href="#">
+					<i class="fas fa-upload mr-2"></i>
+					Upload dance
+				</a>
+				<a href='list' class="btn btn-xl" href="#">
+					<i class="fas fa-bars mr-2"></i>
+					Judge dances
+				</a>
+			</div>
+			</main>
 			
 			<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
 					<div class="container text-center">
@@ -66,6 +62,14 @@
 							<a href="http://arthur-murray.com/" target="_blank"><img class="img-footer-logo" src="img/beach-bash-arthur-murray-dance-studio-free-open-house-159400.png" alt="Arthur Murray logo" ></a>
 					</div>
 				</footer>
-				<script src="particles.js/dist/particles.min.js"></script>
+				<script>
+					window.onload = function() {
+							Particles.init({
+								selector: '.background'
+							});
+						};
+					</script>
+				<canvas class="background"></canvas>
+				<script src="particles.js-master/dist/particles.min.js"></script>
 			</body>
 </html>
