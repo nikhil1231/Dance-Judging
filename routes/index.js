@@ -15,15 +15,9 @@ var path = require('path');
 
 router.get('/', (req, res) => {
     // console.log('/', req.user);
-    // console.log('test');
     // res.sendFile(path.resolve('www/index.html'));
-    console.log("check " + req.user);
     res.render('index', {user:req.user});
-    // res.send("Hello world!")
-})
 
-// router.post('/file', upload.single('data'), (req, res, next) => {
-// 	console.log(req.file)
-// })
+})
 
 module.exports = router;

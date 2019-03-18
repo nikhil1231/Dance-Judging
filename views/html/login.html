@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <title>Login</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="/css/freelancer.min.css" rel="stylesheet">
+  </head>
+  <body id="page-top">
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" height="1">
+      <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Arthur Murray</a></div>
+    </nav>
+    <div class="hero-image">
+      <div class="hero-text">
+        <h3>Where dance and technology collide</h3>
+      </div>
+    </div>
+    <div id="auth"><a href="/auth/register">Register | </a><a href="/auth/login">Login</a>
+    </div>
+    <div></div>
+    <header class="masthead">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Login</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <form action="/auth/login_process" method="post">
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Email</label>
+                  <input class="form-control" name="email" type="text" placeholder="email" value="jerrykang13@gmail.com">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Password</label>
+                  <input class="form-control" name="pwd" type="password" placeholder="password" value="111111">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div><br>
+              <div id="success"></div>
+              <div class="form-group">
+                <input class="btn btn-primary btn-xl" type="submit" value="Login">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>
