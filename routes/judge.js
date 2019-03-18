@@ -9,7 +9,8 @@ const mongoUrl = "mongodb://localhost:27017/dance";
 
 
 router.get('/', (req, res) => {
-    res.sendFile(path.resolve('www/judge.html'));
+	// res.sendFile(path.resolve('www/judge.html'));
+	res.render('judge', {user:req.user});
 })
 
 router.get('/getInfo', (req, res) => {

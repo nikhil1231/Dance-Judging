@@ -16,8 +16,9 @@ var path = require('path');
 router.get('/', (req, res) => {
     // console.log('/', req.user);
     // console.log('test');
-    res.sendFile(path.resolve('www/index.html'));
-    // res.render('index', {});
+    // res.sendFile(path.resolve('www/index.html'));
+    console.log("check " + req.user);
+    res.render('index', {user:req.user});
     // res.send("Hello world!")
 })
 

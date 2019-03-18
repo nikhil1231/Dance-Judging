@@ -1,0 +1,43 @@
+extends ./layout/websiteLayout.pug
+
+block title
+  title Video Upload
+block content
+  include includes/pageTop
+  //- Header
+  header(class="masthead")
+    div(class="container")
+      h2(class="text-center text-uppercase text-secondary mb-0") Upload Video
+      hr(class="star-dark mb-5")
+      div(class="row")
+        div(class="col-lg-8 mx-auto")
+            form(action="/upload/fileupload" method='post' enctype="multipart/form-data" novalidate="novalidate")
+                div(class="control-group")
+                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                        label Competition
+                        input(class="form-control" name="competition" type="text" placeholder="Competition")
+                        p(class="help-block text-danger")
+                div(class="control-group")
+                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                        label Location
+                        input(class="form-control" name="location" type="text" placeholder="Location")
+                        p(class="help-block text-danger")
+                div(class="control-group")
+                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                        label Dance
+                        input(class="form-control" name="dance" type="text" placeholder="Dance")
+                        p(class="help-block text-danger")
+                div(class="control-group")
+                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                        label Name
+                        input(class="form-control" name="name" type="text" placeholder="Name")
+                        p(class="help-block text-danger")
+                div(class="control-group")
+                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                        label Video file
+                        input(class="form-control" name="fileUpload" type="file" accept='video/*')
+                        p(class="help-block text-danger")
+                br
+                div(id="success")
+                div(class="form-group")
+                    input(type="submit" value="Upload" class="btn btn-primary btn-xl")

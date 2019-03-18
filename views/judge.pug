@@ -1,0 +1,22 @@
+extends ./layout/websiteLayout.pug
+
+block title
+  title Judge
+block content
+  include includes/pageTop
+
+  //- Header
+  header(class="masthead bg-primary text-white text-center")
+    div(class="container")
+      h3(id='competition')
+      br
+      h2(id='location')
+      br
+      video(id='video' controls)
+      ul(class='list-group' id='results-list')
+        li(class='list-group-item bg-primary')
+            input(id='rating' type='number' placeholder='Rating')
+            input(id='comment' type='text' placeholder='Comments')
+            button(id='addResult') Add
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+    script(type="text/javascript" src='judge.js')

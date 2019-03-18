@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
 var formidable = require('formidable');
-var fs = require('fs');
-
 
 const mongoClient = require('mongodb').MongoClient;
 const mongoUrl = "mongodb://localhost:27017/dance";
 
 
 router.get('/', (req, res) => {
-    // console.log(__dirname);
-    res.sendFile(path.resolve('www/upload.html'));
+		if(!req.user) {
+			return res.redirect('/auth/login');
+			// return res.render('index', {user:req.user, loginCheck:true});
+		}
+		res.render('upload', {user:req.user});
     // res.end('egoing: '+ req.url);
 })
 
@@ -48,9 +48,10 @@ router.post('/fileupload', (req, res) => {
 				const danceDb = db.db('dance');
 				const collection = danceDb.collection("competitions");
 
-				collection.findOneAndUpdate({dance: { $eq: fields.dance}},
+				collection.findOneAndUpdate({competition: { $eq: fields.competition}},
 					{
 						$setOnInsert: {
+							location: fields.location,
 							routines: []
 						}
 					},
@@ -59,29 +60,19 @@ router.post('/fileupload', (req, res) => {
 						upsert: true
 					}, (err, result) => {
 						collection.update(
-							{dance: { $eq: fields.dance}},
+							{competition: { $eq: fields.competition}},
 							{
 								$push: {
 									routines: {
 										id: filename,
 										name: fields.name,
-                    location: fields.location,
-										competition: fields.competition,
+										location: fields.location,
+										dance: fields.dance,
 										results: []
 									}
 								}
 							}, (err, result) => {
-                var template = `
-                <html>
-                <head>
-                </head>
-                <body>
-                <h1>Video URL: <a href='../judge?id=${filename}'>here</a></h1>
-                </body>
-                </html>
-                `;
-								res.write(template);
-								res.end();
+								res.redirect('/judge?id=${filename}');
 							}
 						)
 					}

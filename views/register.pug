@@ -1,0 +1,38 @@
+extends ./layout/websiteLayout.pug
+
+block title
+  title Register
+block content
+  include includes/pageTop
+
+  header(class="masthead")
+    div(class="container")
+        h2(class="text-center text-uppercase text-secondary mb-0") Register
+        hr(class="star-dark mb-5")
+        div(class="row")
+            div(class="col-lg-8 mx-auto")
+                form(action="/auth/register_process" method='post')
+                    div(class="control-group")
+                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                            label Email
+                            input(class="form-control" name="email" type="text" placeholder="email" value="jerrykang13@gmail.com")
+                            p(class="help-block text-danger")
+                    div(class="control-group")
+                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                            label Password
+                            input(class="form-control" name="pwd" type="password" placeholder="password" value="111111")
+                            p(class="help-block text-danger")
+                    div(class="control-group")
+                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                            label Confirm Password
+                            input(class="form-control" name="pwd2" type="password" placeholder="password" value="111111")
+                            p(class="help-block text-danger")
+                    div(class="control-group")
+                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
+                            label User Name
+                            input(class="form-control" name="userName" type="text" placeholder="User Name" value="test")
+                            p(class="help-block text-danger")
+                    br
+                    div(id="success")
+                    div(class="form-group")
+                        input(type="submit" value="Register" class="btn btn-primary btn-xl")

@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = function (app) {
     const mongoClient = require('mongodb').MongoClient;
     const mongoUrl = "mongodb://localhost:27017/users";
@@ -60,18 +62,22 @@ module.exports = function (app) {
                         }
                         if (!user) {
                             console.log(1);
-                            return done(null, false, {
+                            return done
+                            (null, false, {
                                 message: 'Incorrect email.'
                             });
                         }
-                        if (user.password !== password) {
-                            console.log(2);
-                            return done(null, false, {
-                                message: 'Incorrect password.'
-                            });
-                        }
-                        console.log(3);
-                        return done(null, user);
+                        bcrypt.compare(password, user.password, function(err, result){
+                            if(result) {
+                                console.log(3);
+                                return done(null, user);
+                            } else {
+                                console.log(2);
+                                return done(null, false, {
+                                    message: 'Incorrect password.'
+                                });
+                            }
+                        }); 
                     });
                 }
             })
