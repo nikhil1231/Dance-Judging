@@ -20,4 +20,11 @@ router.get('/', (req, res) => {
 
 })
 
+router.get('/calendar', (req, res) => {
+    // console.log('/', req.user);
+    // res.sendFile(path.resolve('www/index.html'));
+    res.render('calendar', {});
+
+})
+
 module.exports = router;

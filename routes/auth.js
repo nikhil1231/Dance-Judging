@@ -24,8 +24,9 @@ module.exports = function (passport) {
 		var userName = post.userName;
 
 		if (pwd !== pwd2) {
-			var test = req.flash('error', 'Passwords must be the same!');
-			// res.render('register', {errors : test});
+			// req.flash('error', 'Passwords must be the same!');
+			// req.session.save(function () {
+			// });
 			res.redirect('/auth/register');
 		} else {
 			bcrypt.hash(pwd, 10, function(err, hash) {
