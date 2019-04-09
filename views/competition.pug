@@ -1,0 +1,74 @@
+extends ./layout/websiteLayout.pug
+
+block title
+  title Competition
+block head
+  link(rel="stylesheet" href="css/comp.css")
+  style.
+        #map{
+            height:400px;
+            width:30%;
+        }
+block content
+  include includes/pageTop
+  
+  //- Header
+  header(class="masthead bg-primary text-white")
+    div(class="container")
+      h3(id='competition') #{compData.competition}
+      h2(id='location') #{compData.location}
+    div(id="map")
+    div
+      h3(id='title') Routines
+        ul(class='list-group' id='listByDances')
+          - for (var i = 0; i < danceData.dance.length; i++)
+            a(href=`../../judge?id=${danceData.id[i]}` class="text-white") #{danceData.dance[i]}
+
+    script.
+        function initMap() {
+            //- map options
+            var options = {
+                zoom:13,
+                center:{lat:#{compData.latitude}, lng:#{compData.longitude}}
+            }
+            //- new map
+            var map = new google.maps.Map(document.getElementById('map'), options);
+            
+            //- Add marker
+            var marker = new google.maps.Marker({
+                position:{lat:#{compData.latitude}, lng:#{compData.longitude}},
+                map:map
+            });
+
+            //- var infoWindow = new google.maps.InfoWindow({
+            //-     content:'<h1>London UCL</h1>'
+            //- });
+
+            //- marker.addListener('click', function(){
+            //-     infoWindow.open(map, marker);
+            //- });
+            
+        }
+    script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANFPMpuObYpnUUQdbab3lZHB4I3xvENY8&callback=initMap")
+
+    //- script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+    //- script(type="text/javascript").
+    //-   $(document).ready(() => {
+    //-       $.ajax("http://localhost:8080/list/comp/"+#{compData.competition_id}+"/getRoutines", {
+    //-         success: (data) => {
+    //-           console.log("check"); 
+    //-           $('#listByDances').html('');
+    //-           for (const routine of data) {
+    //-             $('#listByDances').append(
+    //-               $('<li>').attr('class', 'list-group-item bg-primary').append(
+    //-                 $(`<a href="../judge?id=${routine.id}">`)
+    //-                 .attr('class', 'text-white')
+    //-                 .append(
+    //-                   `${routine.dance}`
+    //-                 )
+    //-               )
+    //-             );
+    //-           }
+    //-         }
+    //-       });
+    //-     })

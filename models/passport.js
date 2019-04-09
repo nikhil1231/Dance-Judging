@@ -11,7 +11,7 @@ module.exports = function (app) {
     app.use(passport.session());
 
     passport.serializeUser(function (user, done) {
-        console.log('serializeUser', user);
+        // console.log('serializeUser', user);
         done(null, user._id);
     });
 
@@ -29,7 +29,7 @@ module.exports = function (app) {
                         $eq: id
                     }
                 }, function (err, user) {
-                    console.log('deserializeUser', id, user);
+                    // console.log('deserializeUser', id, user);
 
                     done(err, user);
                 });

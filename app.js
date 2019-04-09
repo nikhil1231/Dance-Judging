@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
@@ -19,7 +21,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
 // app.use(express.static(path.join(__dirname, 'www')));
 app.use(express.static(path.join(__dirname, 'views')));

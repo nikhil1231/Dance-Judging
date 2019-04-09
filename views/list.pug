@@ -2,46 +2,49 @@ extends ./layout/websiteLayout.pug
 
 block head
   meta(content="text/html; charset=utf-8")
-  script(src="css/dhtmlxscheduler.js")
-  link(rel="stylesheet" href="css/dhtmlxscheduler.css")
-  style(type="text/css" media="screen").
-      html, body{
-          margin:0px;
-          padding:0px;
-          height:100%;
-          overflow:hidden;
-      }
+  link(rel="stylesheet" href="css/calendar.css")
+
 
 block title
   title View List
 block content
   include includes/pageTop
 
-  script(type="text/javascript" charset="utf-8").
-    function init() {
-        scheduler.init('scheduler_here',new Date(2018,8,4),"month");
-    }
-  body(onload="init();")
-    div(class='calendar')
-      div(id="scheduler_here" class="dhx_cal_container calendar" style='width:100%; height:100%;')
-          div(class="dhx_cal_navline")
-              div(class="dhx_cal_prev_button") &nbsp;
-              div(class="dhx_cal_next_button") &nbsp;
-              div(class="dhx_cal_today_button")
-              div(class="dhx_cal_date")
-              div(class="dhx_cal_tab" name="day_tab")
-              div(class="dhx_cal_tab" name="week_tab")
-              div(class="dhx_cal_tab" name="month_tab")
-          div(class="dhx_cal_header")
-          div(class="dhx_cal_data")
+  //- -var names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  //- -var days = [30, 31, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 1, 2];
+
+  //- .calendar-container
+  //-   .calendar-header
+  //-     h1 
+  //-       | November
+  //-       button ▾
+  //-     p 2018
+  //-   .calendar
+  //-     - for(i=0;i<7;i++)
+  //-       span.day-name= names[i]
+
+  //-     - for(j=0;j<35;j++)
+  //-       - if(j == 0 || j == 1 || j == 33 || j == 34)
+  //-         div.day.day--disabled= days[j]
+
+  //-       - else   
+  //-         div.day= days[j]
+  //-     section.task.task--warning Projects
+  //-     section.task.task--danger Design Sprint
+  //-     section.task.task--primary Product Checkup 1
+  //-     .task__detail
+  //-         h2 Product Checkup 1
+  //-         p 15-17th November
+  //-     section.task.task--info Product Checkup 2
+  
+  Header
+  header(class="masthead bg-primary text-white")
+    div(class="container")
+      h3(id='title') Competitions
+        ul(class='list-group' id='listByCompetitions')
 
 
-
-  //- //- Header
-  //- header(class="masthead bg-primary text-white")
-  //-   div(class="container")
-  //-     h3(id='title') Competitions
-  //-       ul(class='list-group' id='listByCompetitions')
-
-  //-   script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
-  //-   script(type="text/javascript" src='list.js')
+  script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+  script(type="text/javascript" src='list.js')
+  

@@ -3,15 +3,19 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
-    <title>View List</title>
+    <title>Competition</title>
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
     <link href="/css/freelancer.min.css" rel="stylesheet">
-    <meta content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="css/calendar.css">
+    <style>
+      #map{
+          height:400px;
+          width:100%;
+      }
+    </style>
   </head>
   <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" height="1">
@@ -19,15 +23,14 @@
       <div id="auth"><a href="/auth/register">Register | </a><a href="/auth/login">Login</a>
       </div>
     </nav>
-    <Header></Header>
-    <header class="masthead bg-primary text-white">
+    <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <h3 id="title">Competitions
-          <ul class="list-group" id="listByCompetitions"></ul>
-        </h3>
+        <h3 id="competition"></h3><br>
+        <h2 id="location"></h2><br>
       </div>
+      <div id="map"></div>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="competition.js"></script>
     </header>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="list.js"></script>
   </body>
 </html>

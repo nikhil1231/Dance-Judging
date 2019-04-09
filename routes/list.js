@@ -9,9 +9,146 @@ const mongoUrl = "mongodb://localhost:27017/dance";
 
 
 router.get('/', (req, res) => {
-		// res.sendFile(path.resolve('www/list.html'));
-		res.render('list', {user:req.user});
+	mongoClient.connect(mongoUrl, (err, db) => {
+		if (err) {
+			console.log("ERROR: ", err);
+		} else {
+			const collection = db.db('dance').collection("events");
+
+			collection.find({}).toArray((err, result) => {
+				if (err) {
+					res.send(err);
+				} else if (result.length) {
+					for (var i = 0; i < result.length; i++)
+						result[i].id = result[i]._id;
+				} else {}
+			})
+
+			db.close();
+		}
+	})
+		res.render('list', {
+			user: req.user
+		});
 })
+
+// router.get('/comp/:compId/getRoutines',(req, res) => {
+// 	mongoClient.connect(mongoUrl, (err, db) => {
+// 		if (err) {
+// 			console.log("ERROR: ", err);
+// 		} else {
+// 			const collection = db.db('dance').collection("competitions");
+
+// 			const id = new ObjectId(url.parse(req.url, true).query.id);
+// 			// console.log(url.parse(req.url, true).query.id);
+// 			// console.log("haha");
+// 			collection.find({
+// 				_id: id
+// 			}).toArray((err, result) => {
+// 				if (err) {
+// 					res.send(err);
+// 				} else if (result.length) {
+// 					res.send(result[0].routines);
+// 				} else {
+// 					res.send("No documents found.");
+// 				}
+// 			})
+
+// 			db.close();
+// 		}
+// 	})
+// })
+
+router.get('/comp/:compId', (req, res) => {
+	var compData = {};
+	var danceData = {dance:[], id:[]};
+
+	mongoClient.connect(mongoUrl, (err, db) => {
+		if (err) {
+			console.log("ERROR: ", err);
+		} else {
+			const collection = db.db('dance').collection("competitions");
+
+			var id = req.params.compId
+			console.log(req.params.compId);
+
+
+			collection.find({"competition_id": id}).toArray((err, result) => {
+				if (err) {
+					res.send(err);
+				} else if (result.length) {
+					// console.log(result)
+					compData.competition_id = id;
+					compData.competition = result[0].competition;
+					compData.location = result[0].location;
+					compData.latitude = result[0].latitude;
+					compData.longitude = result[0].longitude;
+					for (var i=0; i<result[0].routines.length;i++){
+						danceData.dance.push(result[0].routines[i].dance);
+						danceData.id.push(result[0].routines[i].id);
+					}
+					// danceData.dance = result[0].routines[0].dance;
+					// danceData.id = result[0].routines[0].id;
+
+					console.log(danceData);
+					res.render('competition', {
+						user: req.user,
+						compData: compData,
+						danceData: danceData
+					});
+					
+					// console.log("check : "+compData.competition);
+						// routine: result[0].routines.filter((x) => x.id == id)[0]	
+					// res.send(data);
+					
+				} else {
+					console.log(result);
+					res.send("No documents found.");
+				}
+			})
+			// console.log("check : "+compData.competition);
+			// res.render('competition', {
+			// 	user: req.user,
+			// 	compData: compData,
+			// });
+			db.close();
+		}
+	})
+	// var danceData = []
+	// console.log("hi");
+	// mongoClient.connect(mongoUrl, (err, db) => {
+	// 	if (err) {
+	// 		console.log("ERROR: ", err);
+	// 	} else {
+	// 		const collection = db.db('dance').collection("competitions");
+
+	// 		var id = req.params.compId
+
+
+	// 		collection.find({
+	// 			competition_id: id
+	// 		}).toArray((err, result) => {
+	// 			if (err) {
+	// 				res.send(err);
+	// 			} else if (result.length) {
+	// 				danceData.push(result[0].routines)
+	// 				console.log("hi aggain : " + result[0].routines);
+	// 				// res.send(result[0].routines);
+	// 			} else {
+	// 				// res.send("No documents found.");
+	// 			}
+	// 		})
+
+	// 		db.close();
+	// 	}
+	// })
+	// console.log("dancedata: ");
+	// res.render('competition', {
+	// 	user: req.user,
+	// 	compData: compData,
+	// 	danceData: danceData
+	// });
+});
 
 router.get('/getCompetitions', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
@@ -34,29 +171,7 @@ router.get('/getCompetitions', (req, res) => {
 			db.close();
 		}
 	})
-})
 
-router.get('/getDances', (req, res) => {
-	mongoClient.connect(mongoUrl, (err, db) => {
-		if (err) {
-			console.log("ERROR: ", err);
-		} else {
-			const collection = db.db('dance').collection("competitions");
-
-			collection.find({}).toArray((err, result) => {
-				if (err) {
-					res.send(err);
-				} else if (result.length) {
-					result.forEach((x) => delete x.routines)
-					res.send(result);
-				} else {
-					res.send("No documents found.");
-				}
-			})
-
-			db.close();
-		}
-	})
 })
 
 router.get('/getRoutines', (req, res) => {
@@ -67,11 +182,11 @@ router.get('/getRoutines', (req, res) => {
 			const collection = db.db('dance').collection("competitions");
 
 			const id = new ObjectId(url.parse(req.url, true).query.id);
-      // console.log(url.parse(req.url, true).query.id);
-      // console.log("haha");
-
-
-			collection.find({_id: id}).toArray((err, result) => {
+			// console.log(url.parse(req.url, true).query.id);
+			// console.log("haha");
+			collection.find({
+				_id: id
+			}).toArray((err, result) => {
 				if (err) {
 					res.send(err);
 				} else if (result.length) {

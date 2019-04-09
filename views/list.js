@@ -1,17 +1,15 @@
 $(document).ready(() => {
 	$.ajax("http://localhost:8080/list/getCompetitions", {
 		success: (data) => {
-			if(data === "No documents found."){
+			if (data === "No documents found.") {
 				return;
 			}
 			for (const competition of data) {
+				console.log(data);
 				$('#listByCompetitions').append(
-					$('<li>').attr('class','list-group-item bg-primary').append(
-						$('<a href>')
-							.attr({
-								'class': 'competition-item text-white',
-								'id': competition._id
-							}).append(
+					$('<li>').attr('class', 'list-group-item bg-primary').append(
+						$(`<a href="list/comp/${competition.competition_id}">`)
+						.attr('class', 'text-white').append(
 							`${competition.competition}, ${competition.location}`
 						)
 					)
@@ -27,10 +25,10 @@ $(document).ready(() => {
 				$('#listByCompetitions').html('');
 				for (const routine of data) {
 					$('#listByCompetitions').append(
-						$('<li>').attr('class','list-group-item bg-primary').append(
+						$('<li>').attr('class', 'list-group-item bg-primary').append(
 							$(`<a href="../judge?id=${routine.id}">`)
-								.attr('class', 'text-white')
-								.append(
+							.attr('class', 'text-white')
+							.append(
 								`${routine.dance}`
 							)
 						)
