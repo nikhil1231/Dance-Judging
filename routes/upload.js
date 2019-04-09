@@ -3,9 +3,8 @@ var router = express.Router();
 var formidable = require('formidable');
 var path = require('path');
 var fs = require('fs');
-var NodeGeocoder = require('node-geocoder');
 const shortid = require('shortid');
-
+var NodeGeocoder = require('node-geocoder');
 
 var options = {
 	provider: 'google',
