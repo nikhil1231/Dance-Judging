@@ -38,17 +38,18 @@ router.post('/fileupload', (req, res) => {
 		const d = new Date();
 		// Create unique video file name.
 		const filename = d.getTime() + "_" + Math.floor((Math.random() * 9000) + 1000);
-		// const extension = files.filetoupload.name.split('.').pop();
-		// console.log("Test!!");
-		// const oldpath = files.filetoupload.path;
-		// const newpath = __dirname + '/../videos/' + filename + '.' + extension;
+		console.log(files)
+		const extension = files.fileUpload.name.split('.').pop();
+		console.log("Test!!");
+		const oldpath = files.fileUpload.path;
+		const newpath = __dirname + '/../videos/' + filename + '.' + extension;
 		// Move video to new path
 
-		// console.log(oldpath, newpath)
-		// 	fs.rename(oldpath, newpath, (err) => {
-		// 		if (err) throw err;
-		// 		// res.write('Video successfully uploaded.');
-		// });
+		console.log(oldpath, newpath)
+			fs.rename(oldpath, newpath, (err) => {
+				if (err) throw err;
+				// res.write('Video successfully uploaded.');
+		});
 
 		console.log("fields: " + fields.location);
 		console.log("body: " + req.body.name);
