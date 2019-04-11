@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = function (app) {
     const mongoClient = require('mongodb').MongoClient;

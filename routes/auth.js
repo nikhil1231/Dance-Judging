@@ -4,7 +4,7 @@ var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
 const shortid = require('shortid');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = function (passport) {
 	const mongoClient = require('mongodb').MongoClient;
@@ -33,6 +33,7 @@ module.exports = function (passport) {
 				mongoClient.connect(mongoUrl, (err, db) => {
 					if (err) {
 						console.log("ERROR: ", err);
+						// res.write("test");
 					} else {
 						const danceDb = db.db('users');
 						const collection = danceDb.collection("identities");
