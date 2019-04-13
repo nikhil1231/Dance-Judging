@@ -2,6 +2,9 @@ extends ./layout/websiteLayout.pug
 
 block title
   title Judge
+
+block head
+
 block content
   include includes/pageTop
 
@@ -15,8 +18,22 @@ block content
       video(id='video' controls)
       ul(class='list-group' id='results-list')
         li(class='list-group-item bg-primary')
-            input(id='rating' type='number' placeholder='Rating')
-            input(id='comment' type='textbox' placeholder='Comments')
+            //- input(id='rating' type='number' placeholder='Rating')
+            label Rating
+            select(id='rating')
+              option(value="1") 1 Extremely bad
+              option(value="2") 2 Very bad
+              option(value="3") 3 Bad
+              option(value="4") 4 Mediocre
+              option(value="5") 5 Average
+              option(value="6") 6 Good
+              option(value="7") 7 Very good
+              option(value="8") 8 Great!
+              option(value="9") 9 Amazing!
+              option(value="10") 10 Excellent!
+            br
+            textarea(id="comment", cols="20", rows="3" placeholder='Comments')
+            br
             button(id='addResult') Add
     script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
     script(type="text/javascript" src='judge.js')
