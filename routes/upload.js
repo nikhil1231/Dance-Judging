@@ -20,7 +20,8 @@ var multer  = require('multer');
 var storage = multer.diskStorage({
 	destination: __dirname + '/../recordings',
 	filename: (req, file, cb) => {
-		cb(null, file.fieldname + '-' + Date.now() + ".json")
+		const d = new Date();
+		cb(null, d.getTime() + "_" + Math.floor((Math.random() * 9000) + 1000) + ".json")
 	}
 })
 
@@ -41,83 +42,48 @@ router.get('/', (req, res) => {
 })
 
 router.post('/jsonupload', upload.single('data'), (req, res, next) => {
-	console.log("Uploaded " + req.file.originalname);
+	console.log("Uploaded " + req.file);
 	let rawdata = fs.readFileSync('recordings/' + req.file.filename);  
 	let data = JSON.parse(rawdata);
 
-	createDance({
-		// Temp
-		location: [ { formattedAddress: '8 Alleyn Park, Dulwich, London SE21 8AE, UK',
-		    latitude: 51.42918299999999,
-		    longitude: -0.0855447,
-		    extra: 
-		     { googlePlaceId: 'ChIJe4ULRlYBdkgRUqngqpcsN3U',
-		       confidence: 1,
-		       premise: null,
-		       subpremise: null,
-		       neighborhood: 'Dulwich',
-		       establishment: null },
-		    administrativeLevels: 
-		     { level2long: 'Greater London',
-		       level2short: 'Greater London',
-		       level1long: 'England',
-		       level1short: 'England' },
-		    streetNumber: '8',
-		    streetName: 'Alleyn Park',
-		    city: 'London',
-		    country: 'United Kingdom',
-		    countryCode: 'GB',
-		    zipcode: 'SE21 8AE',
-		    provider: 'google' } ],
+	createDance(res,{
+		location: "8 alleyn park",
 		competition: data.competition,
 		date: "2019-04-12",
 		time: "04:20",
 		name: data.name,
 		dance: data.dance
-	});
+	}, req.file.filename, true);
 })
 
 router.post('/fileupload', (req, res) => {
-	// console.log("check: " + req.body.location);
 
 	var form = new formidable.IncomingForm();
 	form.parse(req, (err, fields, files) => {
-		// console.log("check2 :" + fields.competition);
 		const d = new Date();
 		// Create unique video file name.
 		const filename = d.getTime() + "_" + Math.floor((Math.random() * 9000) + 1000);
-		console.log(files)
 		const extension = files.fileUpload.name.split('.').pop();
 		const oldpath = files.fileUpload.path;
 		const newpath = __dirname + '/../videos/' + filename + '.' + extension;
-		// Move video to new path
 
-		console.log(oldpath, newpath)
-			fs.rename(oldpath, newpath, (err) => {
-				if (err) throw err;
-				// res.write('Video successfully uploaded.');
+		fs.rename(oldpath, newpath, (err) => {
+			if (err) throw err;
 		});
 
-		console.log("fields: " + fields.location);
-		console.log("body: " + req.body.name);
-
-		// res.writeHead(200);
-		// res.end("test");
-
-		createDance(fields);
+		createDance(res, fields, filename);
 	})
 })
 
-function createDance(fields) {
+function createDance(res, fields, filename, kinect=false) {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
 			const danceDb = db.db('dance');
-			const collection = danceDb.collection("competitions");
+			const collection = kinect ? danceDb.collection("competitions_kinect") : danceDb.collection("competitions");
 
 			geocoder.geocode(fields.location, function (err, data) {
-				console.log(data);
 				var latitude = data[0].latitude;
 				var longitude = data[0].longitude;
 				var location = data[0].formattedAddress;
