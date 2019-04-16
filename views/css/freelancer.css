@@ -15,7 +15,7 @@ h4,
 h5,
 h6 {
   font-weight: 700;
-  font-family: 'Montserrat';
+  font-family: 'Lato';
 }
 
 hr.star-light,
@@ -336,11 +336,12 @@ form .row:first-child .floating-label-form-group {
 }
 
 a {
-  color: #18BC9C;
+  color: #fff;
 }
 
 a:focus, a:hover, a:active {
-  color: #128f76;
+  color: #ddd;
+  text-decoration: none;
 }
 
 .btn {
@@ -352,7 +353,7 @@ a:focus, a:hover, a:active {
 }
 
 .bg-secondary {
-  background-color: #2C3E50 !important;
+  background-color: #000 !important;
 }
 
 .text-primary {
@@ -364,13 +365,13 @@ a:focus, a:hover, a:active {
 }
 
 .btn-primary {
-  background-color: #18BC9C;
-  border-color: #18BC9C;
+  background-color: #111;
+  border-color: #111;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #128f76;
-  border-color: #128f76;
+  background-color: #222;
+  border-color: #222;
 }
 
 .btn-secondary {

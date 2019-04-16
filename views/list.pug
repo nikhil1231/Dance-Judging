@@ -38,11 +38,12 @@ block content
   //-         p 15-17th November
   //-     section.task.task--info Product Checkup 2
   
-  Header
-  header(class="masthead bg-primary text-white")
-    div(class="container")
-      h3(id='title') Competitions
-        ul(class='list-group' id='listByCompetitions')
+  header.navbar-margin
+    .container
+      .row
+        .col-10.mx-auto
+          h1.text-center.mb-4 Competitions
+          ul(class='list-group card' id='listByCompetitions')
 
 
   script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")

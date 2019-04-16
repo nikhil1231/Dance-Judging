@@ -53,13 +53,15 @@ router.post('/jsonupload', upload.single('data'), (req, res, next) => {
 		time: "04:20",
 		name: data.name,
 		dance: data.dance
-	}, req.file.filename, true);
+	}, req.file.filename.split('.')[0], true);
 })
 
 router.post('/fileupload', (req, res) => {
 
 	var form = new formidable.IncomingForm();
 	form.parse(req, (err, fields, files) => {
+
+		console.log(fields);
 		const d = new Date();
 		// Create unique video file name.
 		const filename = d.getTime() + "_" + Math.floor((Math.random() * 9000) + 1000);
@@ -84,6 +86,8 @@ function createDance(res, fields, filename, kinect=false) {
 			const collection = kinect ? danceDb.collection("competitions_kinect") : danceDb.collection("competitions");
 
 			geocoder.geocode(fields.location, function (err, data) {
+				console.log(err)
+				console.log(data)
 				var latitude = data[0].latitude;
 				var longitude = data[0].longitude;
 				var location = data[0].formattedAddress;

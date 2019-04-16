@@ -7,7 +7,6 @@
     padding: 2%;
 }
 
-
 #logo-wrapper {
     text-align: center;    
 }
@@ -20,17 +19,43 @@
     z-index: 0;
 }
 
+.bg-dark {
+  background-color: #000 !important;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
 
 /* The hero image */
 
 body, html {
     height: 100%;
-    background: #8a8686; 
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  font-size: 16px;
+}
+
+i {
+  font-family: "Font Awesome 5 Free";
+}
+
+.col-6 {
+  padding: 10px 60px !important;
 }
 
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/dancePhotos/three-dancing-women.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("../img/dancePhotos/three-dancing-women.png");
 
   /* Set a specific height */
   height: 100%;
@@ -50,36 +75,53 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  text-shadow: 0px 0px 10px black;
 }
 
-.filler-img {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  width: 100%;
+.h1-5 {
+  font-size: 3em !important;
 }
 
-main ul { 
-  margin: 20%;
-}
-main ul li {
-  list-style: none;
-  padding: 5%;
-  
+main {
+  padding: 100px 0;
 }
 
-main ul li p { 
-  text-align: center;
-  margin-top: 15px;
+.header-img {
+  height: 50px !important;
+  width: auto;
 }
-main ul li img {
-  height: 15%;
+
+.navbar-brand {
+  padding: 0;
+}
+
+.navbar-margin {
+  margin-top: 150px;
+}
+
+.label {
+  margin: 0;
+  color: #666;
+}
+
+.img-footer-logo.kinect {
   width: 15%;
-  display: block; 
-  margin-left: auto; 
-  margin-right: auto; 
-
+}
+.img-footer-logo.ucl {
+  width: 15%;
 }
 
+.comment-title {
+  float: left;
+}
 
+#new-comment-button {
+  float: right;
+}
+
+.comment-author {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+  margin-top: 8px;
+}

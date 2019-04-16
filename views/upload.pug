@@ -6,48 +6,38 @@ block content
   include includes/pageTop
   //- Header
   header(class="masthead")
-    div(class="container")
-      h2(class="text-center text-uppercase text-secondary mb-0") Upload Video
-      hr(class="star-dark mb-5")
+    .container.navbar-margin
+      h1.h1-5.text-center Upload Video
       div(class="row")
-        div(class="col-lg-8 mx-auto")
-            form(action="/upload/fileupload" method='post' enctype="multipart/form-data" novalidate="novalidate")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Competition
-                        input(class="form-control" name="competition" type="text" placeholder="Competition")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Location(Full Address)
-                        input(class="form-control" name="location" type="text" placeholder="Location(Full Address)")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Dance
-                        input(class="form-control" name="dance" type="text" placeholder="Dance")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Name
-                        input(class="form-control" name="name" type="text" placeholder="Name")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Date
-                        input(class="form-control" name="date" type="date" placeholder="Date")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Time
-                        input(class="form-control" name="time" type="time" placeholder="Time")
-                        p(class="help-block text-danger")
-                div(class="control-group")
-                    div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                        label Video file
-                        input(class="form-control" name="fileUpload" type="file" accept='video/*')
-                        p(class="help-block text-danger")
+        div(class="col-lg-6 mx-auto")
+            form.md-form(action="/upload/fileupload" method='post' enctype="multipart/form-data" novalidate="novalidate")
+                .md-form
+                    input#competition.form-control(name='competition' type='text')
+                    label(for='competition') Competition
+                .md-form
+                    input#location.form-control(name='location' type='text')
+                    label(for='location') Location (Full address)
+                .md-form
+                    input#name.form-control(name='name' type='text')
+                    label(for='name') Name
+                .md-form
+                    input#dance.form-control(name='dance' type='text')
+                    label(for='dance') Dance
+                .container
+                    .row
+                        .col-6
+                            input#date.form-control(name='date' type='date')
+                            label(for='date') Date
+                        .col-6
+                            input#time.form-control(name='time' type='time')
+                            label(for='time') Time
+                .file-field
+                    .btn.btn-light.btn-sm.float-left
+                        span Choose video
+                        input(type='file' name='fileUpload' accept='video/*')
+                    .file-path-wrapper
+                        input.file-path.validate(type='text' placeholder='Upload your file')
                 br
                 div(id="success")
-                div(class="form-group")
-                    input(type="submit" value="Upload" class="btn btn-primary btn-xl")
+                .form-group.text-center
+                    input(type="submit" value="Upload" class="btn btn-primary")

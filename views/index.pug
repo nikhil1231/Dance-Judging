@@ -6,46 +6,60 @@ block content
   include includes/pageTop
   div(class="hero-image")
     div(class="hero-text")
-      h3 Where dance and technology collide
+      h1 Accurate Motion Performance Analysis
+      p Here's some stuff we have to wriet about what the project does etc., idk what to write here yet so its a placeholder.
   main
-    .container
-      ul          
-        li 
-          img(src="./img/logos/dance-couple-png.png", alt="dancing couple logo")
-          p Join our community of dance professionals. 
-        li 
-          img(src="./img/logos/ML-brain.png", alt="brain network logo")
-          p Use this platform to help Microsoft’s cloud-based AI algorithm to learn how to judge ballroom dance performances.
-        li
-          img(src="./img/logos/green-and-blue-logo.png", alt="") 
-          p By uploading your own dance or giving feedback on others you are helping to make the future the present!
-    div 
-      img(class="filler-img", src="./img/dancePhotos/favflashmob.png", alt="dancing flash mob")
-    div(class="text-center mt-4")
-      a(href='upload' class="btn btn-xl btn-outline-light")
-        i(class="fas fa-upload mr-2") Upload Dance
-      a(href='list' class="btn btn-xl")
-        i(class="fas fa-bars mr-2") Judge Dances
+    .container.mt-5.mb-5
+      .row.text-center
+        .col-6
+          h2.mb-4 Video
+          p.mb-4 Here you can upload a video of a dance routine to be judged online by other people around the world. Alternatively, you can view existing dance routines uploaded by other people and judge them yourself.
+          a(href='upload' class="btn btn-outline-primary waves-effect" onclick='setType("video")')
+            i(class="fas fa-upload mr-2")
+            span Upload Video
+          a(href='list' class="btn" onclick='setType("video")')
+            i(class="fas fa-bars mr-2")
+            span Judge Dances
+        .col-6
+          h2.mb-4 Kinect
+          p.mb-4 If you have recorded a video of the dance routine with a Microsoft Kinect sensor, you can upload the JSON file here, as well as through the desktop application. You can also view and judge existing Kinect dance routines.
+          a(href='upload' class="btn btn-outline-default waves-effect" onclick='setType("kinect")')
+            i(class="fas fa-upload mr-2")
+            span Upload JSON
+          a(href='list' class="btn btn-xl" onclick='setType("kinect")')
+            i(class="fas fa-bars mr-2")
+            span Judge Dances
 
-  footer(id="sticky-footer" class="py-4 bg-dark text-white-50")
+  footer(id="sticky-footer" class="py-4 elegant-color-dark text-white-50")
     div(class="container text-center")
       small Copyright &copy; Accurate Motion Performance Analysis Team UCL
-      div
     div(id="logo-wrapper")
       a(href="https://azure.microsoft.com/en-gb/overview/what-is-azure/?&OCID=AID719823_SEM_w7Oa4h4M&lnkd=Google_Azure_Brand&dclid=CjgKEAiAtvPjBRCHgZbe4_2wtQMSJACRB3whGzd9iUhTpdHvW9dcekHVMY-zSnAIxkMbNyorDqn0JfD_BwE" target="_blank")
-      img(class="img-footer-logo" src="img/logos/microsoft-azure-vector-logos-logo-zone-11212.png" alt="Microsoft Azure logo")
-      a(href="https://www.ucl.ac.uk/" target="_blank")
-      img(class="img-footer-logo" src="img/logos/UCL_Institute_of_Education_logo.png" alt="IOE logo")
+        img(class="img-footer-logo microsoft" src="img/logos/micro_w.png" alt="Microsoft Azure logo")
       a(href="https://www.ucl.ac.uk/engineering/" target="_blank")
-      img(class="img-footer-logo" src="img/logos/UCL-Engineering-logo_basic_trans.png" alt="UCL Engineering logo" height="100px")
+        img(class="img-footer-logo kinect" src="img/logos/Kinect_Logo.png" alt="UCL Engineering logo" height="70px")
+      a(href="https://www.ucl.ac.uk/" target="_blank")
+        img(class="img-footer-logo ucl" src="img/logos/ucl_w.jpg" alt="IOE logo")
       a(href="http://arthur-murray.com/" target="_blank")
-      img(class="img-footer-logo" src="img/logos/beach-bash-arthur-murray-dance-studio-free-open-house-159400.png" alt="Arthur Murray logo")
+        img(class="img-footer-logo arthur" src="img/logos/arthur_w.png" alt="Arthur Murray logo")
+      //- a(href="https://azure.microsoft.com/en-gb/overview/what-is-azure/?&OCID=AID719823_SEM_w7Oa4h4M&lnkd=Google_Azure_Brand&dclid=CjgKEAiAtvPjBRCHgZbe4_2wtQMSJACRB3whGzd9iUhTpdHvW9dcekHVMY-zSnAIxkMbNyorDqn0JfD_BwE" target="_blank")
+      //- img(class="img-footer-logo" src="img/logos/microsoft-azure-vector-logos-logo-zone-11212.png" alt="Microsoft Azure logo")
+      //- a(href="https://www.ucl.ac.uk/" target="_blank")
+      //- img(class="img-footer-logo" src="img/logos/UCL_Institute_of_Education_logo.png" alt="IOE logo")
+      //- a(href="https://www.ucl.ac.uk/engineering/" target="_blank")
+      //- img(class="img-footer-logo" src="img/logos/UCL-Engineering-logo_basic_trans.png" alt="UCL Engineering logo" height="100px")
+      //- a(href="http://arthur-murray.com/" target="_blank")
+      //- img(class="img-footer-logo" src="img/logos/beach-bash-arthur-murray-dance-studio-free-open-house-159400.png" alt="Arthur Murray logo")
   
   script.
     window.onload = function() {
       Particles.init({
         selector: '.background'
       })
+    }
+
+    function setType(type) {
+      sessionStorage.setItem("upload_type", type);
     }
   
   canvas(class="background")

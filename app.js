@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({
 // app.use(express.static(path.join(__dirname, 'www')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'videos')));
+app.use("/recordings", express.static(path.join(__dirname, 'recordings')));
 
 app.use(session({
     secret: 'keyboard cat',

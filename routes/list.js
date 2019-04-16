@@ -59,7 +59,7 @@ router.get('/', (req, res) => {
 // 	})
 // })
 
-router.get('/comp/:compId', (req, res) => {
+router.get('/comp/:compId.:uploadType', (req, res) => {
 	var compData = {};
 	var danceData = {dance:[], id:[]};
 
@@ -67,9 +67,10 @@ router.get('/comp/:compId', (req, res) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
-			const collection = db.db('dance').collection("competitions");
+			const uploadType = req.params.uploadType;
+			const collection = db.db('dance').collection(uploadType == "video" ? "competitions" : "competitions_kinect");
 
-			var id = req.params.compId
+			const id = req.params.compId
 			console.log(req.params.compId);
 
 
@@ -150,12 +151,13 @@ router.get('/comp/:compId', (req, res) => {
 	// });
 });
 
-router.get('/getCompetitions', (req, res) => {
+router.get('/getCompetitions/:uploadType', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
-			const collection = db.db('dance').collection("competitions");
+			const uploadType = req.params.uploadType;
+			const collection = db.db('dance').collection(uploadType == "video" ? "competitions" : "competitions_kinect");
 
 			collection.find({}).toArray((err, result) => {
 				if (err) {
@@ -174,27 +176,31 @@ router.get('/getCompetitions', (req, res) => {
 
 })
 
-router.get('/getRoutines', (req, res) => {
+router.get('/getRoutines/:id.:uploadType', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
-			const collection = db.db('dance').collection("competitions");
+			const uploadType = req.params.uploadType;
+			const collection = db.db('dance').collection(uploadType == "video" ? "competitions" : "competitions_kinect");
 
-			const id = new ObjectId(url.parse(req.url, true).query.id);
-			// console.log(url.parse(req.url, true).query.id);
-			// console.log("haha");
-			collection.find({
-				_id: id
-			}).toArray((err, result) => {
-				if (err) {
-					res.send(err);
-				} else if (result.length) {
-					res.send(result[0].routines);
-				} else {
-					res.send("No documents found.");
-				}
-			})
+			const id = req.params.id;
+
+			console.log(id, uploadType)
+			collection.find().toArray((err, result) => console.log(result));
+			
+			// collection.find({
+			// 	_id: id
+			// }).toArray((err, result) => {
+			// 	console.log("result");
+			// 	if (err) {
+			// 		res.send(err);
+			// 	} else if (result.length) {
+			// 		res.send(result[0].routines);
+			// 	} else {
+			// 		res.send("No documents found.");
+			// 	}
+			// })
 
 			db.close();
 		}

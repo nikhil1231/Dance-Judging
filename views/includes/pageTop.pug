@@ -1,9 +1,10 @@
-nav(height="1" class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase")
-  div(class="container")
-    a(class="navbar-brand js-scroll-trigger" href="/") Arthur Murray
-  div(id='auth')
+nav.navbar.fixed-top.elegant-color-dark
+  .container
+    a(class="navbar-brand js-scroll-trigger" href="/")
+      img(src='./img/logos/arthur_w.png' class='header-img')
+  .auth.navbar-text.white-text
     if user
-      a(href="/auth/logout") Logout 
+      a(href="/auth/logout") Log out 
     else
       a(href="/auth/register") Register | 
       a(href="/auth/login") Login

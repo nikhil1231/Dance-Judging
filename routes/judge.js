@@ -13,14 +13,15 @@ router.get('/', (req, res) => {
 	res.render('judge', {user:req.user});
 })
 
-router.get('/getInfo', (req, res) => {
+router.get('/getInfo/:id.:uploadType', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
-			const collection = db.db('dance').collection("competitions");
+			const uploadType = req.params.uploadType;
+			const collection = db.db('dance').collection(uploadType == "video" ? "competitions" : "competitions_kinect");
 
-			const id = url.parse(req.url, true).query.id;
+			const id = req.params.id;
 
 			collection.find({"routines.id": id}).toArray((err, result) => {
 				if (err) {
@@ -42,21 +43,24 @@ router.get('/getInfo', (req, res) => {
 	})
 })
 
-router.post('/addResult', (req, res) => {
+router.post('/addResult/:uploadType', (req, res) => {
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
 		} else {
-			const collection = db.db('dance').collection("competitions");
+			const uploadType = req.params.uploadType;
+			const collection = db.db('dance').collection(uploadType == "video" ? "competitions" : "competitions_kinect");
 			const id = req.body.id;
 			const rating = req.body.rating;
 			const comment = req.body.comment;
+			const name = req.body.name
 
 			collection.updateOne({"routines.id": id},
 				{ $push : {
 					"routines.$.results" : {
 						rating,
-						comment
+						comment,
+						name
 					}
 				}}
 			)

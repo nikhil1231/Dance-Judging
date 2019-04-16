@@ -9,31 +9,53 @@ block content
   include includes/pageTop
 
   //- Header
-  header(class="masthead bg-primary text-white text-center")
-    div(class="container")
-      h3(id='competition')
-      br
-      h2(id='location')
-      br
-      video(id='video' controls)
-      ul(class='list-group' id='results-list')
-        li(class='list-group-item bg-primary')
-            //- input(id='rating' type='number' placeholder='Rating')
-            label Rating
-            select(id='rating')
-              option(value="1") 1 Extremely bad
-              option(value="2") 2 Very bad
-              option(value="3") 3 Bad
-              option(value="4") 4 Mediocre
-              option(value="5") 5 Average
-              option(value="6") 6 Good
-              option(value="7") 7 Very good
-              option(value="8") 8 Great!
-              option(value="9") 9 Amazing!
-              option(value="10") 10 Excellent!
-            br
-            textarea(id="comment", cols="20", rows="3" placeholder='Comments')
-            br
-            button(id='addResult') Add
+  header(class="masthead")
+    .container.navbar-margin.mb-4
+      .row
+        .col-8
+          div(class='video-div webgl-content')
+        .col-4
+          .card.card-body
+            p.label Name
+            h1#name World dancing
+            p.label Dance
+            h2#dance World dancing
+            p.label Competition
+            p#competition World dancing
+            p.label Location
+            p#location World dancing
+
+      .row.mt-4
+        .col-8.card.no-padding
+          ul.list-group
+            li.list-group-item
+              h3.comment-title.no-margin Comments
+              a#new-comment-button.btn.btn-default.btn-rounded(href='' data-toggle='modal' data-target='#comment-modal') Add Comment
+            #results-list
+    
+  .modal.fade#comment-modal(tabindex='-1' role='dialog')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header.text-center
+          h4.modal-title Add comment
+          button.close(type='button' data-dismiss='modal')
+            span &times;
+
+        .modal-body
+          .md-form
+            p.label Score
+            h2#score-span 5
+            input#new-comment-score.custom-range(type='range' min='0' max='10' step='0.5')
+          .md-form
+            textarea#new-comment-text.md-textarea.form-control(rows='3')
+            label(for='new-comment-text') Comment
+          .md-form 
+            input#new-comment-name.form-control(type='text')
+            label(for='new-comment-name') Name
+        .modal-footer.d-flex.justify-content-center
+          button#add-comment-button.btn.btn-default Add
     script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
     script(type="text/javascript" src='judge.js')
+    script(type="text/javascript" src='TemplateData/UnityProgress.js')
+    script(type="text/javascript" src='Build/UnityLoader.js')
+    

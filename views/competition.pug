@@ -1,28 +1,32 @@
-extends ./layout/websiteLayout.pug
+extends ./layout/websiteLayoutDeep.pug
 
 block title
   title Competition
 block head
-  link(rel="stylesheet" href="css/comp.css")
+  link(rel="stylesheet" href="../../css/comp.css")
   style.
         #map{
             height:400px;
             width:30%;
         }
 block content
-  include includes/pageTop
+  include includes/pageTopDeep
   
   //- Header
-  header(class="masthead bg-primary text-white")
+  header.navbar-margin
     div(class="container")
       h3(id='competition') #{compData.competition}
       h2(id='location') #{compData.location}
     div(id="map")
-    div
-      h3(id='title') Routines
-        ul(class='list-group' id='listByDances')
-          - for (var i = 0; i < danceData.dance.length; i++)
-            a(href=`../../judge?id=${danceData.id[i]}` class="text-white") #{danceData.dance[i]}
+    .container
+      .row
+        .col-10.mx-auto
+          h1.text-center.mb-4 Routines
+          ul(class='list-group card' id='listByDances')
+            - for (var i = 0; i < danceData.dance.length; i++)
+              li.list-group-item
+                a(href=`../../judge?id=${danceData.id[i]}`)
+                  h4 #{danceData.dance[i]}
 
     script.
         function initMap() {
