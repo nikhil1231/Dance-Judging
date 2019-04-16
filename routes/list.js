@@ -115,43 +115,10 @@ router.get('/comp/:compId.:uploadType', (req, res) => {
 			db.close();
 		}
 	})
-	// var danceData = []
-	// console.log("hi");
-	// mongoClient.connect(mongoUrl, (err, db) => {
-	// 	if (err) {
-	// 		console.log("ERROR: ", err);
-	// 	} else {
-	// 		const collection = db.db('dance').collection("competitions");
-
-	// 		var id = req.params.compId
-
-
-	// 		collection.find({
-	// 			competition_id: id
-	// 		}).toArray((err, result) => {
-	// 			if (err) {
-	// 				res.send(err);
-	// 			} else if (result.length) {
-	// 				danceData.push(result[0].routines)
-	// 				console.log("hi aggain : " + result[0].routines);
-	// 				// res.send(result[0].routines);
-	// 			} else {
-	// 				// res.send("No documents found.");
-	// 			}
-	// 		})
-
-	// 		db.close();
-	// 	}
-	// })
-	// console.log("dancedata: ");
-	// res.render('competition', {
-	// 	user: req.user,
-	// 	compData: compData,
-	// 	danceData: danceData
-	// });
 });
 
 router.get('/getCompetitions/:uploadType', (req, res) => {
+	const competitions_locations = [];
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
@@ -163,8 +130,22 @@ router.get('/getCompetitions/:uploadType', (req, res) => {
 				if (err) {
 					res.send(err);
 				} else if (result.length) {
-					result.forEach((x) => delete x.routines)
-					res.send(result);
+					result.forEach((x) => {
+						delete x.routines
+						competitions_locations.push({
+							longitude: x.longitude,
+							latitude: x.latitude
+						})
+					})
+					console.log(competitions_locations)
+					// res.render('list', {
+					// 	result,
+					// 	competitions_locations,
+					// });
+
+					res.send({
+						result, competitions_locations
+					})
 				} else {
 					res.send("No documents found.");
 				}

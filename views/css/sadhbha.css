@@ -99,6 +99,10 @@ main {
   margin-top: 150px;
 }
 
+.navbar-margin-small {
+  margin-top: 100px;
+}
+
 .label {
   margin: 0;
   color: #666;
@@ -124,4 +128,8 @@ main {
   font-size: 14px;
   margin: 0;
   margin-top: 8px;
+}
+
+#map {
+  height: 500px;
 }

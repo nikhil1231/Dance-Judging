@@ -33,11 +33,14 @@ block content
                             label(for='time') Time
                 .file-field
                     .btn.btn-light.btn-sm.float-left
-                        span Choose video
-                        input(type='file' name='fileUpload' accept='video/*')
+                        span#choose-file-button-text Choose video
+                        input#choose-file-input(type='file' name='fileUpload' accept='video/*')
                     .file-path-wrapper
                         input.file-path.validate(type='text' placeholder='Upload your file')
                 br
                 div(id="success")
                 .form-group.text-center
                     input(type="submit" value="Upload" class="btn btn-primary")
+
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+    script(type="text/javascript" src='upload.js')
