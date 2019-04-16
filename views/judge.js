@@ -22,8 +22,8 @@ $(document).ready(() => {
 				$('.video-div').append("div").attr({
 					id: "gameContainer",
 				}).css({
-					width: "960px",
-					height: "600px",
+					width: "700px",
+					height: "500px",
 				})
 				gameInstance = UnityLoader.instantiate("gameContainer", "Build/web build.json", {onProgress: (game, progress) => {
 					if(progress == 1) {

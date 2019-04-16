@@ -104,7 +104,7 @@ main {
 }
 
 .label {
-  margin: 0;
+  margin: 8px -1px 0;
   color: #666;
 }
 
@@ -117,6 +117,7 @@ main {
 
 .comment-title {
   float: left;
+  margin-top: 12px;
 }
 
 #new-comment-button {

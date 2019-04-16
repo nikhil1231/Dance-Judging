@@ -1,9 +1,9 @@
-extends ./layout/websiteLayout.pug
+extends ./layout/websiteLayoutSemiDeep.pug
 
 block title
   title Register
 block content
-  include includes/pageTop
+  include includes/pageTopSemiDeep
 
   header(class="masthead")
     div(class="container")
@@ -12,26 +12,18 @@ block content
         div(class="row")
             div(class="col-lg-8 mx-auto")
                 form(action="/auth/register_process" method='post')
-                    div(class="control-group")
-                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                            label Email
-                            input(class="form-control" name="email" type="text" placeholder="email" value="jerrykang13@gmail.com")
-                            p(class="help-block text-danger")
-                    div(class="control-group")
-                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                            label Password
-                            input(class="form-control" name="pwd" type="password" placeholder="password" value="111111")
-                            p(class="help-block text-danger")
-                    div(class="control-group")
-                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                            label Confirm Password
-                            input(class="form-control" name="pwd2" type="password" placeholder="password" value="111111")
-                            p(class="help-block text-danger")
-                    div(class="control-group")
-                        div(class="form-group floating-label-form-group controls mb-0 pb-2")
-                            label User Name
-                            input(class="form-control" name="userName" type="text" placeholder="User Name" value="test")
-                            p(class="help-block text-danger")
+                    .md-form
+                        input#email.form-control(name='email' type='email' value="jerrykang13@gmail.com")
+                        label(for='email') Email
+                    .md-form
+                        input#password.form-control(name='pwd' type='password' value="111111")
+                        label(for='password') Password
+                    .md-form
+                        input#password2.form-control(name='pwd2' type='password' value="111111")
+                        label(for='password2') Confirm password
+                    .md-form
+                        input#username.form-control(name='userName' type='text' value="test")
+                        label(for='username') Username
                     br
                     div(id="success")
                     div(class="form-group")

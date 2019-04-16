@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
 
 router.get('/comp/:compId.:uploadType', (req, res) => {
 	var compData = {};
-	var danceData = {dance:[], id:[]};
+	var danceData = {dance:[], name: [], id:[]};
 
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
@@ -86,6 +86,7 @@ router.get('/comp/:compId.:uploadType', (req, res) => {
 					compData.longitude = result[0].longitude;
 					for (var i=0; i<result[0].routines.length;i++){
 						danceData.dance.push(result[0].routines[i].dance);
+						danceData.name.push(result[0].routines[i].name);
 						danceData.id.push(result[0].routines[i].id);
 					}
 					// danceData.dance = result[0].routines[0].dance;
@@ -118,7 +119,6 @@ router.get('/comp/:compId.:uploadType', (req, res) => {
 });
 
 router.get('/getCompetitions/:uploadType', (req, res) => {
-	const competitions_locations = [];
 	mongoClient.connect(mongoUrl, (err, db) => {
 		if (err) {
 			console.log("ERROR: ", err);
@@ -132,20 +132,13 @@ router.get('/getCompetitions/:uploadType', (req, res) => {
 				} else if (result.length) {
 					result.forEach((x) => {
 						delete x.routines
-						competitions_locations.push({
-							longitude: x.longitude,
-							latitude: x.latitude
-						})
 					})
-					console.log(competitions_locations)
 					// res.render('list', {
 					// 	result,
 					// 	competitions_locations,
 					// });
 
-					res.send({
-						result, competitions_locations
-					})
+					res.send(result);
 				} else {
 					res.send("No documents found.");
 				}
